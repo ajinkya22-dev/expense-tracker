@@ -1,15 +1,15 @@
-import { useState } from "react";
-import Dashboard from "./Dashboard.jsx";  // Assuming you have a Dashboard component
-import Transactions from "./Transactions.jsx";  // Assuming you have a Transactions component
-import About from "./About.jsx";  // Assuming you have an About component
 
-export default function Navbar() {
+import Dashboard from "./Dashboard.jsx";
+import Transactions from "./Transactions.jsx";
+import About from "./About.jsx";
+
+export default function Navbar({ setSession}) {
     // State to track which component should be displayed
-    const [activeComponent, setActiveComponent] = useState("dashboard");
+
 
     // Function to handle navigation (sets the active component)
     const handleNavigation = (component) => {
-        setActiveComponent(component);  // Change the active component based on the link clicked
+        setSession(component);  // Change the active component based on the link clicked
     };
 
     return (
@@ -31,8 +31,8 @@ export default function Navbar() {
                     <ul className="flex flex-col space-y-6 text-xl text-black">
                         <li>
                             <a
-                                href="#dashboard"
-                                onClick={(e) => { e.preventDefault(); handleNavigation("dashboard"); }}
+                                href="#Dashboard"
+                                onClick={(e) => { e.preventDefault(); handleNavigation("Dashboard"); }}
                                 className="hover:text-blue-600"
                             >
                                 Dashboard
@@ -40,8 +40,8 @@ export default function Navbar() {
                         </li>
                         <li>
                             <a
-                                href="#transactions"
-                                onClick={(e) => { e.preventDefault(); handleNavigation("transactions"); }}
+                                href="#Transactions"
+                                onClick={(e) => { e.preventDefault(); handleNavigation("Transactions"); }}
                                 className="hover:text-blue-600"
                             >
                                 Transactions
@@ -49,8 +49,8 @@ export default function Navbar() {
                         </li>
                         <li>
                             <a
-                                href="#about"
-                                onClick={(e) => { e.preventDefault(); handleNavigation("about"); }}
+                                href="#About"
+                                onClick={(e) => { e.preventDefault(); handleNavigation("About"); }}
                                 className="hover:text-blue-600"
                             >
                                 About
