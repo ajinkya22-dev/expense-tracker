@@ -5,8 +5,14 @@ import food from '../Assets/food.png';
 import travel from '../Assets/travel.png';
 import saving from '../Assets/saving.png';
 import shopping from '../Assets/shopping.png';
+import {useSelector } from 'react-redux';
+import React from "react";
+
 
 export default function Dashboard() {
+
+    const transactions = useSelector(state => state.transactions.Transactions);
+
     return (
         <div className="p-6">
             <div className="flex space-x-6 mb-8">
@@ -55,8 +61,31 @@ export default function Dashboard() {
 
             {/* History Section */}
             <div className="history-section mt-8 p-4 border-2 rounded-md">
-                <h3 className="text-xl font-semibold mb-4">History</h3>
-                {/* History content goes here */}
+                <h3 className="text-xl font-semibold mb-4">History ( Week )</h3>
+                <div className="overflow-x-auto shadow-md rounded-lg">
+                    <table className="min-w-full table-auto">
+                        <thead className="bg-gray-100">
+                        <tr>
+                            <th className="py-2 px-4 border-b text-left">Date</th>
+                            <th className="py-2 px-4 border-b text-left">Amount</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {transactions.length === 0 ? (
+                            <tr>
+                                <td colSpan="5" className="py-2 px-4 text-center text-gray-500">No transactions yet.</td>
+                            </tr>
+                        ) : (
+                            transactions.map((txn) => (
+                                <tr key={txn.id}>
+                                    <td className="py-2 px-4 border-b">{txn.date}</td>
+                                    <td className="py-2 px-4 border-b">₹{txn.amount}</td>
+                                </tr>
+                            ))
+                        )}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     );
