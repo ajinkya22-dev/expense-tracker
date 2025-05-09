@@ -17,7 +17,7 @@ export const TransactionSlice = createSlice({
                 id: 2,
                 amount: 50,
                 type: 'Expense',
-                source: '-',
+                source: 'Entertainment',
                 expenseType: 'Food', // Expense type is "Food"
                 date: '2025-05-02',
                 time: '12:30'

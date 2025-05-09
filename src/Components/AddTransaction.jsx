@@ -9,6 +9,7 @@ export default function AddTransaction({ closeModal }) {
     const [amount, setAmount] = useState("");
     const [category, setCategory] = useState(""); // Category: Expense or Income
     const [incomeSource, setIncomeSource] = useState(""); // Text input for income source
+    const [expenseType, setExpenseType] = useState(""); // Expense type (Food, Travel, etc.)
     const [date, setDate] = useState("");
     const [time, setTime] = useState("");
 
@@ -16,6 +17,7 @@ export default function AddTransaction({ closeModal }) {
     const handleCategoryChange = (e) => {
         setCategory(e.target.value);
         setIncomeSource(""); // Clear income source when switching categories
+        setExpenseType(""); // Clear expense type when switching categories
     };
 
     // Handle form submission
@@ -23,7 +25,7 @@ export default function AddTransaction({ closeModal }) {
         e.preventDefault();
 
         // Validate the form fields
-        if (!amount || !category || !date || !time || (category === "Income" && !incomeSource)) {
+        if (!amount || !category || !date || !time || (category === "Income" && !incomeSource) || (category === "Expense" && !expenseType)) {
             alert("Please fill in all fields");
             return;
         }
@@ -32,8 +34,9 @@ export default function AddTransaction({ closeModal }) {
         const newTransaction = {
             id: Date.now(), // Generate a unique ID (could use UUID)
             amount: parseFloat(amount),
-            type: category === "Income" ? "Income" : category, // For Income, type is "Income"
-            source: category === "Income" ? incomeSource : "-", // Only add source if Income
+            type: category === "Income" ? "Income" : "Expense", // For Income, type is "Income", for Expense, it is "Expense"
+            source: category === "Income" ? incomeSource : expenseType, // Only add source if Income
+            expenseType: category === "Expense" ? expenseType : "-", // Only add expenseType if Expense
             date,
             time,
         };
@@ -48,6 +51,7 @@ export default function AddTransaction({ closeModal }) {
         setAmount("");
         setCategory("");
         setIncomeSource("");
+        setExpenseType("");
         setDate("");
         setTime("");
     };
@@ -96,6 +100,25 @@ export default function AddTransaction({ closeModal }) {
                             placeholder="Enter income source"
                             required
                         />
+                    </div>
+                )}
+
+                {/* Expense Type (Visible if category is Expense) */}
+                {category === "Expense" && (
+                    <div className="mb-4">
+                        <label className="block text-gray-700 font-medium mb-2">Expense Type</label>
+                        <select
+                            value={expenseType}
+                            onChange={(e) => setExpenseType(e.target.value)}
+                            className="w-full p-2 border border-gray-300 rounded-lg"
+                            required
+                        >
+                            <option value="">Select Expense Type</option>
+                            <option value="Food">Food</option>
+                            <option value="Travel">Travel</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Education">Education</option>
+                        </select>
                     </div>
                 )}
 

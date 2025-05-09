@@ -12,7 +12,9 @@ import React from "react";
 export default function Dashboard() {
 
     const transactions = useSelector(state => state.transactions.Transactions);
-
+    const calculateFoodCost = transactions
+        .filter(txn => txn.expenseType === "Food")
+        .reduce((total, txn) => total + txn.amount, 0);
     return (
         <div className="p-6">
             <div className="flex space-x-6 mb-8">
