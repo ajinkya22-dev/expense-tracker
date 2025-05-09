@@ -35,7 +35,7 @@ export default function Transactions() {
             {/* Table to display transactions */}
             <div className="overflow-x-auto shadow-md rounded-lg">
                 <table className="min-w-full table-auto">
-                    <thead className="bg-gray-100">
+                    <thead className="bg-gray-100 text-black">
                     <tr>
                         <th className="py-2 px-4 border-b text-left">Date</th>
                         <th className="py-2 px-4 border-b text-left">Time</th>

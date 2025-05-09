@@ -65,7 +65,7 @@ export default function Dashboard() {
             <div className="history-section mt-8 p-4 border-2 rounded-md">
                 <h3 className="text-xl font-semibold mb-4">History ( Week )</h3>
                 <div className="overflow-x-auto shadow-md rounded-lg">
-                    <table className="min-w-full table-auto">
+                    <table className="min-w-full table-auto text-black">
                         <thead className="bg-gray-100">
                         <tr>
                             <th className="py-2 px-4 border-b text-left">Date</th>
