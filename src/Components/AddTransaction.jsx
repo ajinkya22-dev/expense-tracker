@@ -67,7 +67,7 @@ export default function AddTransaction({ closeModal }) {
                         type="number"
                         value={amount}
                         onChange={(e) => setAmount(e.target.value)}
-                        className="w-full p-2 border border-gray-300 rounded-lg"
+                        className="w-full p-2 border border-black rounded-lg text-black"
                         placeholder="Enter amount"
                         required
                     />
@@ -79,7 +79,7 @@ export default function AddTransaction({ closeModal }) {
                     <select
                         value={category}
                         onChange={handleCategoryChange}
-                        className="w-full p-2 border border-gray-300 rounded-lg"
+                        className="w-full p-2 border border-black rounded-lg text-black"
                         required
                     >
                         <option value="">Select Category</option>
@@ -96,7 +96,7 @@ export default function AddTransaction({ closeModal }) {
                             type="text"
                             value={incomeSource}
                             onChange={(e) => setIncomeSource(e.target.value)}
-                            className="w-full p-2 border border-gray-300 rounded-lg"
+                            className="w-full p-2 border border-black rounded-lg text-black"
                             placeholder="Enter income source"
                             required
                         />
@@ -110,7 +110,7 @@ export default function AddTransaction({ closeModal }) {
                         <select
                             value={expenseType}
                             onChange={(e) => setExpenseType(e.target.value)}
-                            className="w-full p-2 border border-gray-300 rounded-lg"
+                            className="w-full p-2 border border-black rounded-lg text-black"
                             required
                         >
                             <option value="">Select Expense Type</option>
@@ -129,7 +129,7 @@ export default function AddTransaction({ closeModal }) {
                         type="date"
                         value={date}
                         onChange={(e) => setDate(e.target.value)}
-                        className="w-full p-2 border border-gray-300 rounded-lg"
+                        className="w-full p-2 border border-black rounded-lg text-black"
                         required
                     />
                 </div>
@@ -141,7 +141,7 @@ export default function AddTransaction({ closeModal }) {
                         type="time"
                         value={time}
                         onChange={(e) => setTime(e.target.value)}
-                        className="w-full p-2 border border-gray-300 rounded-lg"
+                        className="w-full p-2 border border-black rounded-lg text-black"
                         required
                     />
                 </div>

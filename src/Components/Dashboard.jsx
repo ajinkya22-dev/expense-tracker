@@ -21,25 +21,25 @@ export default function Dashboard() {
                 <div className="category-box shadow-md hover:shadow-lg p-6 rounded-lg text-center w-52 bg-indigo-400 flex flex-col items-center">
                     <img src={food} alt="icon" className="w-10 h-10 mb-2" />
                     <div className="text-white font-medium">Food & Essentials</div>
-                    <div className="mt-2 font-semibold text-white">$120</div>
+                    <div className="mt-2 font-semibold text-white">₹120</div>
                 </div>
 
                 <div className="category-box shadow-md hover:shadow-lg p-6 rounded-lg text-center w-52 bg-green-500 flex flex-col items-center">
                     <img src={shopping} alt="icon" className="w-10 h-10 mb-2" />
                     <div className="text-white font-medium">Shopping</div>
-                    <div className="mt-2 font-semibold text-white">$250</div>
+                    <div className="mt-2 font-semibold text-white">₹250</div>
                 </div>
 
                 <div className="category-box shadow-md hover:shadow-lg p-6 rounded-lg text-center w-52 bg-blue-300 flex flex-col items-center">
                     <img src={travel} alt="icon" className="w-10 h-10 mb-2" />
                     <div className="text-white font-medium">Travel</div>
-                    <div className="mt-2 font-semibold text-white">$400</div>
+                    <div className="mt-2 font-semibold text-white">₹400</div>
                 </div>
 
                 <div className="category-box shadow-md hover:shadow-lg p-6 rounded-lg text-center w-52 bg-rose-400 flex flex-col items-center">
                     <img src={saving} alt="icon" className="w-10 h-10 mb-2" />
                     <div className="text-white font-medium">Savings</div>
-                    <div className="mt-2 font-semibold text-white">$800</div>
+                    <div className="mt-2 font-semibold text-white">₹800</div>
                 </div>
             </div>
 
