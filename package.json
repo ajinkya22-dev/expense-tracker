@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://ajinkya-pathak.github.io/Expense-Tracker",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
