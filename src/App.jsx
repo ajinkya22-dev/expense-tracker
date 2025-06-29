@@ -8,7 +8,7 @@ import Login from "./components/Login.jsx";
 function App() {
     const [session, setSession] = useState("Dashboard");
     const [darkTheme, setDarkTheme] = useState(false);
-    const [open , setOpen] = useState(false);
+    const [open, setOpen] = useState(false);
 
     const renderSection = () => {
         switch (session) {
@@ -23,27 +23,27 @@ function App() {
         }
     };
 
-    if(!open){
+    if (!open) {
         return <Login setOpen={setOpen} />;
     }
 
     return (
+        <div className={`flex flex-col md:flex-row min-h-screen transition duration-300 ${darkTheme ? "bg-gray-900 text-white" : "bg-slate-300 text-black"}`}>
 
-           <div className={`flex min-h-screen transition duration-300 ${darkTheme ? "bg-gray-900 text-white" : "bg-slate-300 text-black"}`}>
-               {/* Sidebar */}
-               <div className={`w-64 shadow-md ${darkTheme ? "bg-gray-900" : "bg-white"}`}>
-                   <Navbar setSession={setSession} setDarkTheme={setDarkTheme} theme={darkTheme} />
-               </div>
+            {/* Sidebar */}
+            <div className={`w-full md:w-64 shadow-md ${darkTheme ? "bg-gray-900" : "bg-white"}`}>
+                <Navbar setSession={setSession} setDarkTheme={setDarkTheme} theme={darkTheme} />
+            </div>
 
-               {/* Main Content */}
-               <div className="flex-1 p-6 flex justify-center items-start">
-                   <div className={`rounded-2xl shadow-md p-6 w-full max-w-4xl transition duration-300 ${darkTheme ? "bg-gray-800 text-white" : "bg-white text-black"}`}>
-                       {renderSection()}
-                   </div>
-               </div>
-           </div>
-
+            {/* Main Content */}
+            <div className="flex-1 p-4 sm:p-6 flex justify-center items-start">
+                <div className={`rounded-xl shadow-md p-4 sm:p-6 w-full max-w-4xl transition duration-300 ${darkTheme ? "bg-gray-800 text-white" : "bg-white text-black"}`}>
+                    {renderSection()}
+                </div>
+            </div>
+        </div>
     );
 }
+
 
 export default App;

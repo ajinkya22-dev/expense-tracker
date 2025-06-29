@@ -25,16 +25,16 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
 export default class Example extends PureComponent {
     render() {
         return (
-            <div style={{ width: '100%', textAlign: 'center' }}>
+            <div className="w-full max-w-xl mx-auto text-center">
                 <ResponsiveContainer width="100%" height={300}>
                     <PieChart>
                         <Pie
                             data={data}
-                            cx="70%"
+                            cx="50%" // Centered
                             cy="50%"
                             labelLine={false}
                             label={renderCustomizedLabel}
-                            outerRadius={120}
+                            outerRadius="80%" // Responsive radius
                             fill="#8884d8"
                             dataKey="value"
                         >
@@ -46,24 +46,12 @@ export default class Example extends PureComponent {
                 </ResponsiveContainer>
 
                 {/* Custom Legend */}
-                <div style={{ display: 'flex', justifyContent: 'right', marginTop: 16, flexWrap: 'wrap' }}>
+                <div className="flex justify-center flex-wrap mt-4 gap-4 text-sm">
                     {data.map((entry, index) => (
-                        <div
-                            key={`legend-${index}`}
-                            style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                marginRight: 20,
-                                marginBottom: 10,
-                            }}
-                        >
+                        <div key={`legend-${index}`} className="flex items-center">
                             <div
-                                style={{
-                                    width: 12,
-                                    height: 12,
-                                    backgroundColor: COLORS[index % COLORS.length],
-                                    marginRight: 6,
-                                }}
+                                className="w-3 h-3 rounded-sm mr-2"
+                                style={{ backgroundColor: COLORS[index % COLORS.length] }}
                             ></div>
                             <span>{entry.name}</span>
                         </div>
