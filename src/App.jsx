@@ -1,49 +1,150 @@
 import { useState } from "react";
-import Navbar from './components/Navbar.jsx';
-import Dashboard from "./components/Dashboard.jsx";
-import Transactions from "./components/Transactions.jsx";
-import About from "./components/About.jsx";
-import Login from "./components/Login.jsx";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useTheme } from './context/ThemeContext.jsx';
+import Navbar from './Components/Navbar.jsx';
+import Dashboard from "./Components/Dashboard.jsx";
+import Transactions from "./Components/Transactions.jsx";
+import About from "./Components/About.jsx";
+import Login from "./Components/login.jsx";
+import SignUp from "./Components/signUp.jsx";
+import HomePage from "./Components/HomePage.jsx";
+import AddTransaction from "./Components/AddTransaction.jsx";
+import Reports from "./Components/Reports.jsx";
+import Analysis from "./Components/Analysis.jsx";
+import Settings from "./Components/Settings.jsx";
+
+// Protected route component
+const ProtectedRoute = ({ children }) => {
+  const { isAuthenticated } = useSelector(state => state.auth);
+  return isAuthenticated ? children : <Navigate to="/login" />;
+};
+
+// Layout component for dashboard pages
+const DashboardLayout = ({ children }) => {
+  const { darkMode } = useTheme();
+
+  return (
+    <div className={`flex flex-row h-screen ${darkMode ? 'dark' : ''} bg-gray-50 dark:bg-gray-900 overflow-hidden`}>
+      {/* Navbar component will render differently based on screen size */}
+      <Navbar />
+
+      {/* Main Content - centered on desktop, proper spacing on mobile */}
+      <div className="flex-1 overflow-y-auto w-full">
+        <div className="p-4 md:p-6 max-w-full pt-20 md:pt-4 pb-20 md:pb-4">
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 function App() {
-    const [session, setSession] = useState("Dashboard");
-    const [darkTheme, setDarkTheme] = useState(false);
-    const [open, setOpen] = useState(false);
+  // For GitHub Pages we need a basename
+  const basePath = import.meta.env.BASE_URL || '/';
+  const { darkMode } = useTheme();
 
-    const renderSection = () => {
-        switch (session) {
-            case "Dashboard":
-                return <Dashboard theme={darkTheme} />;
-            case "Transactions":
-                return <Transactions theme={darkTheme} />;
-            case "About":
-                return <About theme={darkTheme} />;
-            default:
-                return <Dashboard theme={darkTheme} />;
-        }
-    };
+  return (
+    <Router basename={basePath}>
+      <div className={`min-h-screen ${darkMode ? 'dark' : ''} dark:bg-gray-900 dark:text-white transition-colors duration-200`}>
+        <Routes>
+          {/* Public routes */}
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
 
-    if (!open) {
-        return <Login setOpen={setOpen} />;
-    }
+          {/* Protected routes with dashboard layout */}
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <DashboardLayout>
+                  <Dashboard />
+                </DashboardLayout>
+              </ProtectedRoute>
+            }
+          />
 
-    return (
-        <div className={`flex flex-col md:flex-row min-h-screen transition duration-300 ${darkTheme ? "bg-gray-900 text-white" : "bg-slate-300 text-black"}`}>
+          <Route
+            path="/transactions"
+            element={
+              <ProtectedRoute>
+                <DashboardLayout>
+                  <Transactions />
+                </DashboardLayout>
+              </ProtectedRoute>
+            }
+          />
 
-            {/* Sidebar */}
-            <div className={`w-full md:w-64 shadow-md ${darkTheme ? "bg-gray-900" : "bg-white"}`}>
-                <Navbar setSession={setSession} setDarkTheme={setDarkTheme} theme={darkTheme} />
-            </div>
+          <Route
+            path="/add-transaction"
+            element={
+              <ProtectedRoute>
+                <DashboardLayout>
+                  <AddTransaction />
+                </DashboardLayout>
+              </ProtectedRoute>
+            }
+          />
 
-            {/* Main Content */}
-            <div className="flex-1 p-4 sm:p-6 flex justify-center items-start">
-                <div className={`rounded-xl shadow-md p-4 sm:p-6 w-full max-w-4xl transition duration-300 ${darkTheme ? "bg-gray-800 text-white" : "bg-white text-black"}`}>
-                    {renderSection()}
-                </div>
-            </div>
-        </div>
-    );
+          <Route
+            path="/about"
+            element={
+              <ProtectedRoute>
+                <DashboardLayout>
+                  <About />
+                </DashboardLayout>
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Reports and Analysis routes */}
+          <Route
+            path="/reports"
+            element={
+              <ProtectedRoute>
+                <DashboardLayout>
+                  <Reports />
+                </DashboardLayout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/analytics"
+            element={
+              <ProtectedRoute>
+                <DashboardLayout>
+                  <Analysis />
+                </DashboardLayout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/settings"
+            element={
+              <ProtectedRoute>
+                <DashboardLayout>
+                  <Settings />
+                </DashboardLayout>
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Catch-all route - redirect to dashboard if authenticated, otherwise to login */}
+          <Route
+            path="*"
+            element={
+              <ProtectedRoute>
+                <Navigate to="/dashboard" replace />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </div>
+    </Router>
+  );
 }
-
 
 export default App;
