@@ -54,13 +54,20 @@ export default function Navbar() {
     <>
       {/* Desktop Sidebar - hidden on mobile */}
       <div className="hidden md:flex h-screen flex-col bg-white dark:bg-gray-800 shadow-sm py-5 w-64 transition-colors duration-200">
-        {/* App Logo - Theme Toggle removed */}
+        {/* App Logo with Theme Toggle */}
         <div className="px-6 mb-6 flex justify-between items-center">
           <div className="flex items-center">
             <FiDollarSign size={24} className="text-blue-600 dark:text-blue-400" />
             <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">ExpensifyX</span>
           </div>
-          {/* Dark mode toggle button removed */}
+          {/* Added Dark mode toggle button */}
+          <button
+            onClick={toggleDarkMode}
+            className="p-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+            title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+          >
+            {darkMode ? <FiSun size={18} /> : <FiMoon size={18} />}
+          </button>
         </div>
 
         {/* Profile Area */}
@@ -117,8 +124,15 @@ export default function Navbar() {
           <FiDollarSign size={24} className="text-blue-600 dark:text-blue-400" />
           <span className="ml-2 text-lg font-bold text-gray-900 dark:text-white">ExpensifyX</span>
         </div>
-        <div className="flex items-center">
-          {/* Dark mode toggle button removed */}
+        <div className="flex items-center space-x-2">
+          {/* Added Dark mode toggle button for mobile */}
+          <button
+            onClick={toggleDarkMode}
+            className="p-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
+            title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+          >
+            {darkMode ? <FiSun size={18} /> : <FiMoon size={18} />}
+          </button>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="p-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
